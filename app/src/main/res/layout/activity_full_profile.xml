@@ -149,7 +149,7 @@
                 android:text="Straight,Woman,Single,Monogamous"
                 android:textColor="@color/black"
                 android:gravity="center"
-                android:drawableLeft="@drawable/edit"
+                android:drawableLeft="@drawable/basics"
                 android:drawablePadding="8dp"/>
         </LinearLayout>
         <LinearLayout
@@ -163,7 +163,7 @@
                 android:text="Looking for men for new friends."
                 android:textColor="@color/black"
                 android:gravity="center"
-                android:drawableLeft="@drawable/edit"
+                android:drawableLeft="@drawable/looks"
                 android:drawablePadding="8dp"/>
         </LinearLayout>
 

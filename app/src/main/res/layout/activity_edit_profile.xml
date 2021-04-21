@@ -20,7 +20,7 @@
             android:id="@+id/edition_Profile"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/sampleimage"
+            android:src="@drawable/girl3"
             android:scaleType="fitXY"/>
         <ImageView
             android:layout_alignParentLeft="true"
@@ -39,6 +39,7 @@
             android:id="@+id/photoedit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:drawableLeft="@drawable/camera_alt_24"
             android:text="  Edit profile"
             android:textColor="@color/white"
@@ -129,20 +130,13 @@
                 android:id="@+id/stright"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:drawableLeft="@drawable/edit"
+                android:drawableLeft="@drawable/basics"
+                android:gravity="center_vertical"
+                android:drawableRight="@drawable/ic_baseline_arrow_forward_ios_24"
                 android:text="  Stright, Man, Single, Monogamous"
                 android:textColor="@color/black"
                 android:textStyle="normal"
                 />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_baseline_arrow_forward_ios_24"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                />
-
 
 
         </RelativeLayout>
@@ -159,20 +153,13 @@
                 android:id="@+id/pronouns"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:drawableLeft="@drawable/edit"
+                android:drawableLeft="@drawable/pronouns"
+                android:drawableRight="@drawable/ic_baseline_arrow_forward_ios_24"
                 android:text="  Add: pronouns"
+                android:gravity="center_vertical"
                 android:textColor="#636161"
                 android:textStyle="italic"
                 />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_baseline_arrow_forward_ios_24"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                />
-
 
 
         </RelativeLayout>
@@ -189,18 +176,12 @@
                 android:id="@+id/body_type"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:drawableLeft="@drawable/edit"
+                android:drawableLeft="@drawable/looks"
+            android:drawableRight="@drawable/ic_baseline_arrow_forward_ios_24"
                 android:text="  Add: height, body type"
+                android:gravity="center_vertical"
                 android:textColor="#636161"
                 android:textStyle="italic"
-                />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_baseline_arrow_forward_ios_24"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
                 />
 
 
@@ -219,21 +200,13 @@
                 android:id="@+id/politics"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:drawableLeft="@drawable/edit"
+                android:drawableLeft="@drawable/background"
                 android:text="  Add: ethnicity, politics, language(s), \noccupation, education, religion, sign"
                 android:textColor="#636161"
+                android:drawableRight="@drawable/ic_baseline_arrow_forward_ios_24"
+                android:gravity="center_vertical"
                 android:textStyle="italic"
                 />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_baseline_arrow_forward_ios_24"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                />
-
-
 
         </RelativeLayout>
 
@@ -249,18 +222,12 @@
                 android:id="@+id/smoking"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:drawableLeft="@drawable/edit"
+                android:drawableLeft="@drawable/lifestyle"
+                android:drawableRight="@drawable/ic_baseline_arrow_forward_ios_24"
                 android:text="  Add: smoking, drinking, marijuana,diet..."
                 android:textColor="#636161"
+                android:gravity="center_vertical"
                 android:textStyle="italic"
-                />
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_baseline_arrow_forward_ios_24"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
                 />
 
 
@@ -297,22 +264,16 @@
                  <TextView
                      android:id="@+id/myself"
                      android:layout_below="@+id/aboutme"
-                     android:layout_width="wrap_content"
+                     android:layout_width="match_parent"
                      android:layout_height="wrap_content"
                      android:text="My self-summary"
-
+android:textStyle="bold"
+                     android:drawableRight="@drawable/ic_baseline_arrow_forward_ios_24"
                      android:paddingLeft="8dp"
                      android:paddingBottom="5dp"
                      android:textColor="#000000"
                      />
 
-                 <ImageView
-                     android:layout_width="wrap_content"
-                     android:layout_height="wrap_content"
-                     android:src="@drawable/ic_baseline_arrow_forward_ios_24"
-                     android:layout_alignParentRight="true"
-                     android:layout_centerVertical="true"
-                     />
 
 
 
@@ -342,10 +303,10 @@
                  android:layout_below="@+id/develoder"
                  android:layout_width="wrap_content"
                  android:layout_height="wrap_content"
-                 android:drawableLeft="@drawable/blue_pencil"
+                 android:drawableLeft="@drawable/blue_pencil1"
                  android:text=" EDIT"
                  android:textStyle="bold"
-                 android:textSize="18sp"
+                 android:textSize="16sp"
                  android:textColor="#0064FF"
                  />
 
@@ -386,28 +347,22 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Aspiration"
+
                         android:padding="8dp"
                         android:textColor="#636161"
                         />
                     <TextView
                         android:id="@+id/current_goal"
                         android:layout_below="@+id/aspiration"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:drawableRight="@drawable/ic_baseline_arrow_forward_ios_24"
                         android:text="Current goal"
                         android:paddingLeft="8dp"
                         android:paddingBottom="5dp"
                         android:textColor="#000000"
                         />
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/ic_baseline_arrow_forward_ios_24"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        />
-
 
 
 
@@ -436,10 +391,10 @@
                     android:layout_below="@+id/working"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/blue_pencil"
+                    android:drawableLeft="@drawable/blue_pencil1"
                     android:text=" EDIT"
                     android:textStyle="bold"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     android:textColor="#0064FF"
                     />
 
@@ -487,21 +442,16 @@
                     <TextView
                         android:id="@+id/beat_you"
                         android:layout_below="@+id/talent"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Current goal"
+                        android:textStyle="bold"
+                        android:drawableRight="@drawable/ic_baseline_arrow_forward_ios_24"
                         android:paddingLeft="8dp"
                         android:paddingBottom="5dp"
                         android:textColor="#000000"
                         />
 
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/ic_baseline_arrow_forward_ios_24"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        />
 
 
 
@@ -531,10 +481,10 @@
                     android:layout_below="@+id/go_ahead"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/blue_pencil"
+                    android:drawableLeft="@drawable/blue_pencil1"
                     android:text=" EDIT"
                     android:textStyle="bold"
-                    android:textSize="18sp"
+                    android:textSize="16sp"
                     android:textColor="#0064FF"
                     />
 
