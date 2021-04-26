@@ -8,7 +8,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.cupid.R;
 import com.google.android.material.textfield.TextInputEditText;
@@ -19,10 +22,14 @@ import java.util.Calendar;
 public class SignUpActivity extends AppCompatActivity {
     Button Have_Account;
     Button SignUp;
-//    TextInputEditText dob;
-//    TextInputLayout dob_layout;
     TextView dob;
     DatePickerDialog datePickerDialog;
+
+
+    RadioGroup radioGroup;
+    RadioButton radioButton;
+    TextInputEditText full_name, username, email, phone, password;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +38,14 @@ public class SignUpActivity extends AppCompatActivity {
         Have_Account = findViewById(R.id.Have_Account);
         SignUp = findViewById(R.id.signup);
 
-        dob =findViewById(R.id.dob);
+        full_name = findViewById(R.id.full_name);
+        username = findViewById(R.id.username);
+        email = findViewById(R.id.email);
+        phone = findViewById(R.id.phone);
+        password = findViewById(R.id.password);
+
+
+        dob = findViewById(R.id.dob);
 //        dob_layout=findViewById(R.id.dob_layout);
         dob.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,9 +75,35 @@ public class SignUpActivity extends AppCompatActivity {
         SignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(SignUpActivity.this, SignupSuccessfullActivity.class);
-                startActivity(i);
-                finish();
+                String fullname, usernam, emailadress, phonenum, pass;
+                fullname = full_name.getText().toString().trim();
+                usernam = username.getText().toString().trim();
+                emailadress = email.getText().toString().trim();
+                phonenum = phone.getText().toString().trim();
+                pass = password.getText().toString();
+
+                if (fullname.isEmpty()) {
+                    full_name.setError("Name required");
+                    return;
+                } else if (usernam.isEmpty()) {
+                    username.setError("Username required");
+                    return;
+                } else if (emailadress.isEmpty()) {
+                    email.setError("Email required");
+                    return;
+                } else if (phonenum.isEmpty()) {
+                    phone.setError("Phone required");
+                    return;
+                } else if (pass.isEmpty()) {
+                    password.setError("Password required");
+                    return;
+                } else {
+
+
+                    Intent i = new Intent(SignUpActivity.this, SignupSuccessfullActivity.class);
+                    startActivity(i);
+                    finish();
+                }
             }
         });
         Have_Account.setOnClickListener(new View.OnClickListener() {
