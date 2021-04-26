@@ -13,11 +13,20 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.cupid.R;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
 public class SignUpActivity extends AppCompatActivity {
     Button Have_Account;
@@ -25,6 +34,7 @@ public class SignUpActivity extends AppCompatActivity {
     TextView dob;
     DatePickerDialog datePickerDialog;
 
+    RequestQueue queue;
 
     RadioGroup radioGroup;
     RadioButton radioButton;
@@ -46,6 +56,7 @@ public class SignUpActivity extends AppCompatActivity {
 
         radioGroup = findViewById(R.id.radiogroup);
 
+        queue = Volley.newRequestQueue(this);
 
         dob = findViewById(R.id.dob);
 //        dob_layout=findViewById(R.id.dob_layout);
@@ -90,6 +101,16 @@ public class SignUpActivity extends AppCompatActivity {
 
                 gender = radioButton.getText().toString().trim();
 
+                if (gender.equals("Male")){
+                    gender="M";
+                }
+                else if (gender.equals("Female")){
+                    gender="F";
+                }
+                else if(gender.equals("Other")){
+                    gender="O";
+                }
+
                 if (fullname.isEmpty()) {
                     full_name.setError("Name required");
                     return;
@@ -109,6 +130,7 @@ public class SignUpActivity extends AppCompatActivity {
                     dob.setError("Select a date from calender");
                     return;
                 } else {
+                    signup(fullname,usernam,emailadress,phonenum,pass,dateofbirth,gender);
 
                     Intent i = new Intent(SignUpActivity.this, SignupSuccessfullActivity.class);
                     startActivity(i);
@@ -124,6 +146,37 @@ public class SignUpActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+    }
+    public void signup(String fullname,String usernam,String emailadress,String phonenum,String pass,String dateofbirth,String gender){
+
+        String url= "http://api.betterdate.info/endpoints/signup.php";
+
+        StringRequest request=new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<>();
+                params.put("email", emailadress);
+                params.put("phone", phonenum);
+                params.put("name", fullname);
+                params.put("username", usernam);
+                params.put("gender", gender);
+                params.put("dob", dateofbirth);
+                params.put("password", pass);
+                return params;
+            }
+        };
+        queue.add(request);
 
     }
 }
