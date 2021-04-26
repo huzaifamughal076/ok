@@ -24,6 +24,10 @@ import com.example.cupid.R;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.sql.Struct;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
@@ -155,6 +159,32 @@ public class SignUpActivity extends AppCompatActivity {
         StringRequest request=new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
+
+                try {
+                    JSONObject object=new JSONObject(response);
+
+                    String status=object.getString("status");
+                    String message= object.getString("message");
+                    String respons= object.getString("response");
+
+                    JSONObject object1=new JSONObject(respons);
+                    String userid=object1.getString("userid");
+
+                    if (status.equals("true")){
+                        Toast.makeText(getApplicationContext(),message,Toast.LENGTH_LONG).show();
+                        Intent i=new Intent(SignUpActivity.this,SignupSuccessfullActivity.class);
+                        i.putExtra("userid",userid);
+                        startActivity(i);
+
+                    }
+                    if (status.equals("false")){
+                        Toast.makeText(getApplicationContext(),message,Toast.LENGTH_LONG).show();
+                        return;
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
 
             }
         }, new Response.ErrorListener() {

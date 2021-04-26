@@ -4,29 +4,58 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.provider.ContactsContract;
+import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.cupid.R;
+import com.theartofdev.edmodo.cropper.CropImage;
+import com.theartofdev.edmodo.cropper.CropImageView;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class SignupSuccessfullActivity extends AppCompatActivity {
 
+    private CircleImageView profileimage;
+    private static final int PICK_IMAGE = 1;
+    Uri imageUri;
+    Uri resultUri;
+
+    ImageView view;
+
+    ImageView profile;
+
+
+
     Button next,submit;
-    LinearLayout letsgetstarted,thanks;
+    LinearLayout letsgetstarted,thanks,questionPart,updation;
 
     LinearLayout Q1main,Q2main,Q3main,Q4main,Q5main,Q6main,Q7main,Q8main,Q9main,Q10main,Q11main,Q12main,Q13main,Q14main,Q15main;
 
@@ -216,6 +245,9 @@ public class SignupSuccessfullActivity extends AppCompatActivity {
         otherspinner14 = (ListView) findViewById(R.id.otherspinner14);
         otherspinner15 = (ListView) findViewById(R.id.otherspinner15);
 
+        questionPart = findViewById(R.id.question_part);
+        updation = findViewById(R.id.updation);
+
         next = findViewById(R.id.next);
         submit=findViewById(R.id.submit);
         letsgetstarted = findViewById(R.id.letsgetstarted);
@@ -224,6 +256,7 @@ public class SignupSuccessfullActivity extends AppCompatActivity {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Intent i= new Intent(SignupSuccessfullActivity.this,HomeScreen.class);
                 startActivity(i);
                 finish();
@@ -238,7 +271,49 @@ public class SignupSuccessfullActivity extends AppCompatActivity {
 
             }
         });
+
+
+        profileimage = (CircleImageView) findViewById(R.id.imgView);
+        profileimage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+                startActivityForResult(gallery, PICK_IMAGE);
+//                Intent gallery = new Intent();
+//                gallery.setType("image/*");
+//                gallery.setAction(Intent.ACTION_GET_CONTENT);
+//                startActivityForResult(Intent.createChooser(gallery, "sellect picture"), PICK_IMAGE);
+
+            }
+
+        });
+
+
+
     }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK && requestCode == PICK_IMAGE){
+            imageUri = data.getData();
+            profileimage.setImageURI(imageUri);
+        }
+    }
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//
+//        if (resultCode==RESULT_OK){
+//            if (resultCode==1){
+//                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),data);
+//
+//            }
+//        }
+//    }
+
+
+
     public void q1main()
     {
 
@@ -1867,6 +1942,18 @@ public class SignupSuccessfullActivity extends AppCompatActivity {
                         Q15main.setVisibility(View.GONE);
                         thanks.setVisibility(View.VISIBLE);
 
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+
+                                questionPart.setVisibility(View.GONE);
+                                updation.setVisibility(View.VISIBLE);
+
+                            }
+                        },2000);
+
+
+
                     }
                 },1000);
 
@@ -1877,5 +1964,6 @@ public class SignupSuccessfullActivity extends AppCompatActivity {
         });
 
     }
+
 
 }

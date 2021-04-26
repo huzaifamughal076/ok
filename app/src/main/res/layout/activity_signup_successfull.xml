@@ -9,6 +9,17 @@
     tools:context=".Activities.SignupSuccessfullActivity">
 
     <LinearLayout
+        android:id="@+id/question_part"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible"
+        android:orientation="vertical">
+
+
+
+
+
+    <LinearLayout
         android:id="@+id/letsgetstarted"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -2545,20 +2556,103 @@
             android:layout_weight="1"
             android:gravity="bottom">
 
-            <Button
-                android:id="@+id/submit"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="15dp"
-                android:layout_marginBottom="15dp"
-                android:backgroundTint="#133280"
-                android:paddingVertical="15dp"
-                android:text="Continue"
-                android:textColor="@color/white" />
         </LinearLayout>
 
 
     </LinearLayout>
+
+
+    </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/updation"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1.5"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/imgView"
+                    android:layout_width="160dp"
+                    android:layout_height="160dp"
+                    android:src="@drawable/download"
+                    app:civ_border_width="1dp"
+                    app:civ_border_color="#FF000000"/>
+                <TextView
+                    android:padding="10dp"
+                    android:textColor="@color/black"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:text="Upload your profile"/>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+
+                android:orientation="vertical"
+                >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="12dp"
+                    android:elevation="12dp">
+
+                <EditText
+                    android:padding="5dp"
+                   android:gravity="start"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
+                    android:textColor="@color/black"
+                    android:hint="Enter Description (Optional)"
+                    android:textColorHint="#716F6F"
+                    />
+
+            </LinearLayout>
+
+
+            </LinearLayout>
+
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:gravity="center"
+                android:layout_weight="0.5"
+                android:layout_margin="12dp"
+                android:orientation="vertical">
+
+
+               <Button
+                   android:id="@+id/submit"
+                   android:layout_marginBottom="8dp"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:text="Continue to profile"
+                   android:textColor="@color/white"
+                   android:backgroundTint="@color/purple_700"
+                   />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
 
 
 
