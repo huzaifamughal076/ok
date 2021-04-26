@@ -138,6 +138,7 @@ public class LoginActivity extends AppCompatActivity {
                         String userId=object1.getString("userid");
 
                         Intent i = new Intent(LoginActivity.this, HomeScreen.class);
+                        i.putExtra("UserId",userId);
                         startActivity(i);
                         finish();
 
@@ -164,5 +165,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         };
         queue.add(request);
+
     }
 }

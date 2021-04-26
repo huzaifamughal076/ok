@@ -192,15 +192,17 @@
                         android:orientation="horizontal">
 
                         <RadioButton
+                            android:id="@+id/male"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="15dp"
-                            android:checked="false"
+                            android:checked="true"
                             android:backgroundTint="#6A6A6A"
                             android:textColor="#6A6A6A"
                             android:text="Male" />
 
                         <RadioButton
+                            android:id="@+id/female"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:backgroundTint="#6A6A6A"
@@ -210,6 +212,7 @@
                             android:text="Female" />
 
                         <RadioButton
+                            android:id="@+id/other"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="15dp"

@@ -44,6 +44,8 @@ public class SignUpActivity extends AppCompatActivity {
         phone = findViewById(R.id.phone);
         password = findViewById(R.id.password);
 
+        radioGroup = findViewById(R.id.radiogroup);
+
 
         dob = findViewById(R.id.dob);
 //        dob_layout=findViewById(R.id.dob_layout);
@@ -75,12 +77,18 @@ public class SignUpActivity extends AppCompatActivity {
         SignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String fullname, usernam, emailadress, phonenum, pass;
+                String fullname, usernam, emailadress, phonenum, pass, gender, dateofbirth;
                 fullname = full_name.getText().toString().trim();
                 usernam = username.getText().toString().trim();
                 emailadress = email.getText().toString().trim();
                 phonenum = phone.getText().toString().trim();
-                pass = password.getText().toString();
+                pass = password.getText().toString().trim();
+                dateofbirth = dob.getText().toString().trim();
+
+                int selectedgender = radioGroup.getCheckedRadioButtonId();
+                radioButton = findViewById(selectedgender);
+
+                gender = radioButton.getText().toString().trim();
 
                 if (fullname.isEmpty()) {
                     full_name.setError("Name required");
@@ -97,8 +105,10 @@ public class SignUpActivity extends AppCompatActivity {
                 } else if (pass.isEmpty()) {
                     password.setError("Password required");
                     return;
+                } else if (dateofbirth.equals("Date of Birth")) {
+                    dob.setError("Select a date from calender");
+                    return;
                 } else {
-
 
                     Intent i = new Intent(SignUpActivity.this, SignupSuccessfullActivity.class);
                     startActivity(i);
