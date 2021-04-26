@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -49,81 +50,86 @@ public class SignupSuccessfullActivity extends AppCompatActivity {
     Uri resultUri;
 
     ImageView view;
-
     ImageView profile;
 
 
 
-    Button next,submit;
-    LinearLayout letsgetstarted,thanks,questionPart,updation;
+    Button next, submit;
+    LinearLayout letsgetstarted, thanks, questionPart, updation;
 
-    LinearLayout Q1main,Q2main,Q3main,Q4main,Q5main,Q6main,Q7main,Q8main,Q9main,Q10main,Q11main,Q12main,Q13main,Q14main,Q15main;
+    LinearLayout Q1main, Q2main, Q3main, Q4main, Q5main, Q6main, Q7main, Q8main, Q9main, Q10main, Q11main, Q12main, Q13main, Q14main, Q15main;
 
-    TextView you,you2,you3,you4,you5,you6,you7,you8,you9,you10,you11,you12,you13,you14,you15;
-    TextView Other,Other2,Other3,Other4,Other5,Other6,Other7,Other8,Other9,Other10,Other11,Other12,Other13,Other14,Other15;
+    TextView you, you2, you3, you4, you5, you6, you7, you8, you9, you10, you11, you12, you13, you14, you15;
+    TextView Other, Other2, Other3, Other4, Other5, Other6, Other7, Other8, Other9, Other10, Other11, Other12, Other13, Other14, Other15;
 
-    CircleImageView yourimg,Otherimg;
+    CircleImageView yourimg, Otherimg;
 
-    String[] Q1spinner={"One night","A few months to a year","Several years","The rest of my life"};
-    String[] Q1otherspinner={"One night","A few months to a year","Several years","The rest of my life"};
 
-    String[] Q2spinner={"Carefree","Intense"};
-    String[] Q2Otherspinner={"Carefree","Intense"};
+    String Q1, Q2, Q3, Q4, Q5, Q6, Q7, Q8, Q9, Q10, Q11, Q12, Q13, Q14, Q15;
+    String q1a, q2a, q3a, q4a, q5a, q6a, q7a, q8a, q9a, q10a, q11a, q12a, q13a, q14a, q15a;
+    String q1b, q2b, q3b, q4b, q5b, q6b, q7b, q8b, q9b, q10b, q11b, q12b, q13b, q14b, q15b;
 
-    String[] Q3spinner={"Extremely important","Somewhat imporatant","Not very important","Not important at all"};
-    String[] Q3otherspinner={"Extremely important","Somewhat imporatant","Not very important","Not important at all"};
 
-    String[] Q4spinner={"Absolutely","No way","Get arried yes, settle down no","Get married no, settle down yes"};
-    String[] Q4otherspinner={"Absolutely","No way","Get arried yes, settle down no","Get married no, settle down yes"};
+    String[] Q1spinner = {"One night", "A few months to a year", "Several years", "The rest of my life"};
+    String[] Q1otherspinner = {"One night", "A few months to a year", "Several years", "The rest of my life"};
 
-    String[] Q5spinner={"Yes","No"};
-    String[] Q5otherspinner={"Yes","No"};
+    String[] Q2spinner = {"Carefree", "Intense"};
+    String[] Q2Otherspinner = {"Carefree", "Intense"};
 
-    String[] Q6spinner={"Yes, it's not a problem for me","Yes, if I thought the debt were justified","No"};
-    String[] Q6otherspinner={"Yes, it's not a problem for me","Yes, if I thought the debt were justified","No"};
+    String[] Q3spinner = {"Extremely important", "Somewhat imporatant", "Not very important", "Not important at all"};
+    String[] Q3otherspinner = {"Extremely important", "Somewhat imporatant", "Not very important", "Not important at all"};
 
-    String[] Q7spinner={"Liberal / Left","Centrist","Consevative / Right","Other"};
-    String[] Q7otherspinner={"Liberal / Left","Centrist","Consevative / Right","Other"};
+    String[] Q4spinner = {"Absolutely", "No way", "Get arried yes, settle down no", "Get married no, settle down yes"};
+    String[] Q4otherspinner = {"Absolutely", "No way", "Get arried yes, settle down no", "Get married no, settle down yes"};
 
-    String[] Q8spinner={"Liberal / Left","Centrist","Consevative / Right","Other"};
-    String[] Q8otherspinner={"Liberal / Left","Centrist","Consevative / Right","Other"};
+    String[] Q5spinner = {"Yes", "No"};
+    String[] Q5otherspinner = {"Yes", "No"};
 
-    String[] Q9spinner={"Liberal / Left","Centrist","Consevative / Right","Other"};
-    String[] Q9otherspinner={"Liberal / Left","Centrist","Consevative / Right","Other"};
+    String[] Q6spinner = {"Yes, it's not a problem for me", "Yes, if I thought the debt were justified", "No"};
+    String[] Q6otherspinner = {"Yes, it's not a problem for me", "Yes, if I thought the debt were justified", "No"};
 
-    String[] Q10spinner={"Kissing inParis","Kissing in the tent,in woods"};
-    String[] Q10otherspinner={"Kissing inParis","Kissing in the tent,in woods"};
+    String[] Q7spinner = {"Liberal / Left", "Centrist", "Consevative / Right", "Other"};
+    String[] Q7otherspinner = {"Liberal / Left", "Centrist", "Consevative / Right", "Other"};
 
-    String[] Q11spinner={"Yes","No"};
-    String[] Q11otherspinner={"Yes","No"};
+    String[] Q8spinner = {"Liberal / Left", "Centrist", "Consevative / Right", "Other"};
+    String[] Q8otherspinner = {"Liberal / Left", "Centrist", "Consevative / Right", "Other"};
 
-    String[] Q12spinner={"Yes","No"};
-    String[] Q12otherspinner={"Yes","No"};
+    String[] Q9spinner = {"Liberal / Left", "Centrist", "Consevative / Right", "Other"};
+    String[] Q9otherspinner = {"Liberal / Left", "Centrist", "Consevative / Right", "Other"};
 
-    String[] Q13spinner={"Yes","No"};
-    String[] Q13otherspinner={"Yes","No"};
+    String[] Q10spinner = {"Kissing inParis", "Kissing in the tent,in woods"};
+    String[] Q10otherspinner = {"Kissing inParis", "Kissing in the tent,in woods"};
 
-    String[] Q14spinner={"Always","Usually","Rarely","Never"};
-    String[] Q14otherspinner={"Always","Usually","Rarely","Never"};
+    String[] Q11spinner = {"Yes", "No"};
+    String[] Q11otherspinner = {"Yes", "No"};
 
-    String[] Q15spinner={"Yes","No"};
-    String[] Q15otherspinner={"Yes","No"};
+    String[] Q12spinner = {"Yes", "No"};
+    String[] Q12otherspinner = {"Yes", "No"};
 
-    ListView spinner1,otherspinner1;
-    ListView spinner2,otherspinner2;
-    ListView spinner3,otherspinner3;
-    ListView spinner4,otherspinner4;
-    ListView spinner5,otherspinner5;
-    ListView spinner6,otherspinner6;
-    ListView spinner7,otherspinner7;
-    ListView spinner8,otherspinner8;
-    ListView spinner9,otherspinner9;
-    ListView spinner10,otherspinner10;
-    ListView spinner11,otherspinner11;
-    ListView spinner12,otherspinner12;
-    ListView spinner13,otherspinner13;
-    ListView spinner14,otherspinner14;
-    ListView spinner15,otherspinner15;
+    String[] Q13spinner = {"Yes", "No"};
+    String[] Q13otherspinner = {"Yes", "No"};
+
+    String[] Q14spinner = {"Always", "Usually", "Rarely", "Never"};
+    String[] Q14otherspinner = {"Always", "Usually", "Rarely", "Never"};
+
+    String[] Q15spinner = {"Yes", "No"};
+    String[] Q15otherspinner = {"Yes", "No"};
+
+    ListView spinner1, otherspinner1;
+    ListView spinner2, otherspinner2;
+    ListView spinner3, otherspinner3;
+    ListView spinner4, otherspinner4;
+    ListView spinner5, otherspinner5;
+    ListView spinner6, otherspinner6;
+    ListView spinner7, otherspinner7;
+    ListView spinner8, otherspinner8;
+    ListView spinner9, otherspinner9;
+    ListView spinner10, otherspinner10;
+    ListView spinner11, otherspinner11;
+    ListView spinner12, otherspinner12;
+    ListView spinner13, otherspinner13;
+    ListView spinner14, otherspinner14;
+    ListView spinner15, otherspinner15;
 
     LinearLayout otheruser,
             otheruser2,
@@ -249,15 +255,16 @@ public class SignupSuccessfullActivity extends AppCompatActivity {
         updation = findViewById(R.id.updation);
 
         next = findViewById(R.id.next);
-        submit=findViewById(R.id.submit);
+        submit = findViewById(R.id.submit);
         letsgetstarted = findViewById(R.id.letsgetstarted);
-        thanks=findViewById(R.id.thanks);
+        thanks = findViewById(R.id.thanks);
+
 
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Intent i= new Intent(SignupSuccessfullActivity.this,HomeScreen.class);
+                Intent i = new Intent(SignupSuccessfullActivity.this, HomeScreen.class);
                 startActivity(i);
                 finish();
             }
@@ -267,7 +274,9 @@ public class SignupSuccessfullActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 letsgetstarted.setVisibility(View.GONE);
-                q1main();
+
+                   q1main();
+
 
             }
         });
@@ -290,12 +299,12 @@ public class SignupSuccessfullActivity extends AppCompatActivity {
         });
 
 
-
     }
+
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK && requestCode == PICK_IMAGE){
+        if (resultCode == RESULT_OK && requestCode == PICK_IMAGE) {
             imageUri = data.getData();
             profileimage.setImageURI(imageUri);
         }
@@ -313,676 +322,797 @@ public class SignupSuccessfullActivity extends AppCompatActivity {
 //    }
 
 
-
-    public void q1main()
-    {
+    public void q1main() {
 
 // Mine Spinner1
 
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, Q1spinner) {
-            @NonNull
-            @Override
-            public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-                View view = super.getView(position, convertView, parent);
+        SharedPreferences sharedPreferences = getSharedPreferences("Questoins", MODE_PRIVATE);
+        String Qu1 = sharedPreferences.getString("Q1", "");
 
-                TextView mytext = (TextView) view.findViewById(android.R.id.text1);
-
-                mytext.setTextColor(Color.BLACK);
+        if (Qu1.isEmpty()) {
 
 
-                return view;
-            }
-        };
-        spinner1.setAdapter(adapter);
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, Q1spinner) {
+                @NonNull
+                @Override
+                public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+                    View view = super.getView(position, convertView, parent);
 
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                spinner1.setVisibility(View.VISIBLE);
-            }
-        },1000);
+                    TextView mytext = (TextView) view.findViewById(android.R.id.text1);
+
+                    mytext.setTextColor(Color.BLACK);
 
 
-        spinner1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String item = spinner1.getItemAtPosition(position).toString();
+                    return view;
+                }
+            };
+            spinner1.setAdapter(adapter);
 
-                Toast.makeText(getApplicationContext(),"You Selected "+item,Toast.LENGTH_SHORT).show();
-
-                spinner1.setVisibility(View.GONE);
-
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-
-                        otheruser.setVisibility(View.VISIBLE);
-                    }
-                },1000);
-
-                you.setText(item);
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    spinner1.setVisibility(View.VISIBLE);
+                }
+            }, 1000);
 
 
-            }
-        });
+            spinner1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    String item = spinner1.getItemAtPosition(position).toString();
+
+                    Toast.makeText(getApplicationContext(), "You Selected " + item, Toast.LENGTH_SHORT).show();
+
+                    q1a = item;
+
+                    spinner1.setVisibility(View.GONE);
+
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+
+                            otheruser.setVisibility(View.VISIBLE);
+                        }
+                    }, 1000);
+
+                    you.setText(item);
 
 
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-        //Other Spinner1
-
-        ArrayAdapter<String> sadapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, Q1otherspinner) {
-            @NonNull
-            @Override
-            public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-                View view = super.getView(position, convertView, parent);
-
-                TextView mytext = (TextView) view.findViewById(android.R.id.text1);
-
-                mytext.setTextColor(Color.BLACK);
+                }
+            });
 
 
-                return view;
-            }
-        };
-        otherspinner1.setAdapter(sadapter);
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                otherspinner1.setVisibility(View.VISIBLE);
-            }
-        },1000);
+            //Other Spinner1
 
+            ArrayAdapter<String> sadapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, Q1otherspinner) {
+                @NonNull
+                @Override
+                public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+                    View view = super.getView(position, convertView, parent);
 
+                    TextView mytext = (TextView) view.findViewById(android.R.id.text1);
 
-        otherspinner1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String items = otherspinner1.getItemAtPosition(position).toString();
-
-                Toast.makeText(getApplicationContext(),"You Selected "+items,Toast.LENGTH_SHORT).show();
-
-                otherspinner1.setVisibility(View.GONE);
-
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-
-                        Q1main.setVisibility(View.GONE);
-                        Q2main.setVisibility(View.VISIBLE);
-                        q2main();
-
-                    }
-                },1000);
-
-                Other.setText(items);
+                    mytext.setTextColor(Color.BLACK);
 
 
-            }
-        });
+                    return view;
+                }
+            };
+            otherspinner1.setAdapter(sadapter);
+
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    otherspinner1.setVisibility(View.VISIBLE);
+                }
+            }, 1000);
+
+
+            otherspinner1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    String items = otherspinner1.getItemAtPosition(position).toString();
+
+                    Toast.makeText(getApplicationContext(), "You Selected " + items, Toast.LENGTH_SHORT).show();
+                    q1b = items;
+
+                    otherspinner1.setVisibility(View.GONE);
+
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+
+                            Q1 = q1a + "," + q1b;
+                            SharedPreferences.Editor editor = getSharedPreferences("Questoins", MODE_PRIVATE).edit();
+                            editor.putString("Q1", Q1);
+                            editor.apply();
+
+
+                            Q1main.setVisibility(View.GONE);
+                            Q2main.setVisibility(View.VISIBLE);
+                            q2main();
+
+                        }
+                    }, 1000);
+
+                    Other.setText(items);
+
+
+                }
+            });
+        } else {
+            Q1main.setVisibility(View.GONE);
+            Q2main.setVisibility(View.VISIBLE);
+            q2main();
+        }
 
     }
 
-    public void q2main()
-    {
+    public void q2main() {
 
 /////////////////////////////////////////////////////////////////////////////////////////////
 
 // Mine Spinner2
 
-        ArrayAdapter<String> s2adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, Q2spinner) {
-            @NonNull
-            @Override
-            public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-                View view = super.getView(position, convertView, parent);
+        SharedPreferences sharedPreferences = getSharedPreferences("Questoins", MODE_PRIVATE);
+        String Qu2 = sharedPreferences.getString("Q2", "");
 
-                TextView mytext = (TextView) view.findViewById(android.R.id.text1);
-
-                mytext.setTextColor(Color.BLACK);
-
-                return view;
-            }
-        };
-        spinner2.setAdapter(s2adapter);
-
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                spinner2.setVisibility(View.VISIBLE);
-            }
-        },1000);
+        if (Qu2.isEmpty()) {
 
 
-        spinner2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String item2 = spinner2.getItemAtPosition(position).toString();
+            ArrayAdapter<String> s2adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, Q2spinner) {
+                @NonNull
+                @Override
+                public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+                    View view = super.getView(position, convertView, parent);
 
-                Toast.makeText(getApplicationContext(),"You Selected "+item2,Toast.LENGTH_SHORT).show();
+                    TextView mytext = (TextView) view.findViewById(android.R.id.text1);
 
-                spinner2.setVisibility(View.GONE);
+                    mytext.setTextColor(Color.BLACK);
 
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
+                    return view;
+                }
+            };
+            spinner2.setAdapter(s2adapter);
 
-                        otheruser2.setVisibility(View.VISIBLE);
-                    }
-                },1000);
-
-                you2.setText(item2);
-
-
-            }
-        });
-
-
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-        //Other Spinner2
-
-        ArrayAdapter<String> s2oadapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, Q2Otherspinner) {
-            @NonNull
-            @Override
-            public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-                View view = super.getView(position, convertView, parent);
-
-                TextView mytext = (TextView) view.findViewById(android.R.id.text1);
-
-                mytext.setTextColor(Color.BLACK);
-
-                return view;
-            }
-        };
-        otherspinner2.setAdapter(s2oadapter);
-
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                otherspinner2.setVisibility(View.VISIBLE);
-            }
-        },1000);
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    spinner2.setVisibility(View.VISIBLE);
+                }
+            }, 1000);
 
 
+            spinner2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    String item2 = spinner2.getItemAtPosition(position).toString();
 
-        otherspinner2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String item2s = otherspinner2.getItemAtPosition(position).toString();
+                    Toast.makeText(getApplicationContext(), "You Selected " + item2, Toast.LENGTH_SHORT).show();
 
-                Toast.makeText(getApplicationContext(),"You Selected "+item2s,Toast.LENGTH_SHORT).show();
+                    spinner2.setVisibility(View.GONE);
 
-                otherspinner2.setVisibility(View.GONE);
+                    q2a = item2;
 
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
 
-                        Q2main.setVisibility(View.GONE);
-                        Q3main.setVisibility(View.VISIBLE);
-                        q3main();
+                            otheruser2.setVisibility(View.VISIBLE);
+                        }
+                    }, 1000);
 
-                    }
-                },1000);
-
-                Other2.setText(item2s);
+                    you2.setText(item2);
 
 
-            }
-        });
+                }
+            });
+
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            //Other Spinner2
+
+            ArrayAdapter<String> s2oadapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, Q2Otherspinner) {
+                @NonNull
+                @Override
+                public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+                    View view = super.getView(position, convertView, parent);
+
+                    TextView mytext = (TextView) view.findViewById(android.R.id.text1);
+
+                    mytext.setTextColor(Color.BLACK);
+
+                    return view;
+                }
+            };
+            otherspinner2.setAdapter(s2oadapter);
+
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    otherspinner2.setVisibility(View.VISIBLE);
+                }
+            }, 1000);
+
+
+            otherspinner2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    String item2s = otherspinner2.getItemAtPosition(position).toString();
+
+                    Toast.makeText(getApplicationContext(), "You Selected " + item2s, Toast.LENGTH_SHORT).show();
+
+                    otherspinner2.setVisibility(View.GONE);
+
+                    q1b = item2s;
+
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+
+                            Q2 = q2a + "," + q2b;
+                            SharedPreferences.Editor editor = getSharedPreferences("Questoins", MODE_PRIVATE).edit();
+                            editor.putString("Q2", Q2);
+                            editor.apply();
+
+
+                            Q2main.setVisibility(View.GONE);
+                            Q3main.setVisibility(View.VISIBLE);
+                            q3main();
+
+                        }
+                    }, 1000);
+
+                    Other2.setText(item2s);
+
+
+                }
+            });
+
+        } else {
+            Q2main.setVisibility(View.GONE);
+            Q3main.setVisibility(View.VISIBLE);
+            q3main();
+        }
 
     }
 
-    public void q3main()
-    {
+    public void q3main() {
 
 // Mine Spinner3
 
-        ArrayAdapter<String> s3adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, Q3spinner) {
-            @NonNull
-            @Override
-            public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-                View view = super.getView(position, convertView, parent);
+        SharedPreferences sharedPreferences = getSharedPreferences("Questoins", MODE_PRIVATE);
+        String Qu3 = sharedPreferences.getString("Q3", "");
 
-                TextView mytext = (TextView) view.findViewById(android.R.id.text1);
-
-                mytext.setTextColor(Color.BLACK);
-
-                return view;
-            }
-        };
-        spinner3.setAdapter(s3adapter);
-
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                spinner3.setVisibility(View.VISIBLE);
-            }
-        },1000);
+        if (Qu3.isEmpty()) {
 
 
-        spinner3.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String item3 = spinner3.getItemAtPosition(position).toString();
+            ArrayAdapter<String> s3adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, Q3spinner) {
+                @NonNull
+                @Override
+                public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+                    View view = super.getView(position, convertView, parent);
 
-                Toast.makeText(getApplicationContext(),"You Selected "+item3,Toast.LENGTH_SHORT).show();
+                    TextView mytext = (TextView) view.findViewById(android.R.id.text1);
 
-                spinner3.setVisibility(View.GONE);
+                    mytext.setTextColor(Color.BLACK);
 
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
+                    return view;
+                }
+            };
+            spinner3.setAdapter(s3adapter);
 
-                        otheruser3.setVisibility(View.VISIBLE);
-                    }
-                },1000);
-
-                you3.setText(item3);
-
-
-            }
-        });
-
-
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-        //Other Spinner2
-
-        ArrayAdapter<String> s3oadapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, Q3otherspinner) {
-            @NonNull
-            @Override
-            public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-                View view = super.getView(position, convertView, parent);
-
-                TextView mytext = (TextView) view.findViewById(android.R.id.text1);
-
-                mytext.setTextColor(Color.BLACK);
-
-                return view;
-            }
-        };
-        otherspinner3.setAdapter(s3oadapter);
-
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                otherspinner3.setVisibility(View.VISIBLE);
-            }
-        },1000);
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    spinner3.setVisibility(View.VISIBLE);
+                }
+            }, 1000);
 
 
+            spinner3.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    String item3 = spinner3.getItemAtPosition(position).toString();
 
-        otherspinner3.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String item3s = otherspinner3.getItemAtPosition(position).toString();
+                    Toast.makeText(getApplicationContext(), "You Selected " + item3, Toast.LENGTH_SHORT).show();
 
-                Toast.makeText(getApplicationContext(),"You Selected "+item3s,Toast.LENGTH_SHORT).show();
+                    q3a = item3;
 
-                otherspinner3.setVisibility(View.GONE);
+                    spinner3.setVisibility(View.GONE);
 
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
 
-                        Q3main.setVisibility(View.GONE);
-                        Q4main.setVisibility(View.VISIBLE);
-                        q4main();
+                            otheruser3.setVisibility(View.VISIBLE);
+                        }
+                    }, 1000);
 
-                    }
-                },1000);
-
-                Other3.setText(item3s);
+                    you3.setText(item3);
 
 
-            }
-        });
+                }
+            });
 
 
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            //Other Spinner2
+
+            ArrayAdapter<String> s3oadapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, Q3otherspinner) {
+                @NonNull
+                @Override
+                public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+                    View view = super.getView(position, convertView, parent);
+
+                    TextView mytext = (TextView) view.findViewById(android.R.id.text1);
+
+                    mytext.setTextColor(Color.BLACK);
+
+                    return view;
+                }
+            };
+            otherspinner3.setAdapter(s3oadapter);
+
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    otherspinner3.setVisibility(View.VISIBLE);
+                }
+            }, 1000);
+
+
+            otherspinner3.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    String item3s = otherspinner3.getItemAtPosition(position).toString();
+
+                    Toast.makeText(getApplicationContext(), "You Selected " + item3s, Toast.LENGTH_SHORT).show();
+
+                    otherspinner3.setVisibility(View.GONE);
+
+                    q3b = item3s;
+
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+
+                            Q3 = q3a + "," + q3b;
+                            SharedPreferences.Editor editor = getSharedPreferences("Questoins", MODE_PRIVATE).edit();
+                            editor.putString("Q3", Q3);
+                            editor.apply();
+
+
+                            Q3main.setVisibility(View.GONE);
+                            Q4main.setVisibility(View.VISIBLE);
+                            q4main();
+
+                        }
+                    }, 1000);
+
+                    Other3.setText(item3s);
+
+
+                }
+            });
+
+        } else {
+            Q3main.setVisibility(View.GONE);
+            Q4main.setVisibility(View.VISIBLE);
+            q4main();
+        }
 
 
         /////////////////////////////////////////////////////////////////////////////////
     }
 
-
-    public void q4main()
-    {
+    public void q4main() {
 
 // Mine Spinner4
 
-        ArrayAdapter<String> s4adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, Q4spinner) {
-            @NonNull
-            @Override
-            public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-                View view = super.getView(position, convertView, parent);
+        SharedPreferences sharedPreferences = getSharedPreferences("Questoins", MODE_PRIVATE);
+        String Qu4 = sharedPreferences.getString("Q4", "");
 
-                TextView mytext = (TextView) view.findViewById(android.R.id.text1);
-
-                mytext.setTextColor(Color.BLACK);
-
-                return view;
-            }
-        };
-        spinner4.setAdapter(s4adapter);
-
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                spinner4.setVisibility(View.VISIBLE);
-            }
-        },1000);
+        if (Qu4.isEmpty()) {
 
 
-        spinner4.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String item4 = spinner4.getItemAtPosition(position).toString();
+            ArrayAdapter<String> s4adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, Q4spinner) {
+                @NonNull
+                @Override
+                public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+                    View view = super.getView(position, convertView, parent);
 
-                Toast.makeText(getApplicationContext(),"You Selected "+item4,Toast.LENGTH_SHORT).show();
+                    TextView mytext = (TextView) view.findViewById(android.R.id.text1);
 
-                spinner4.setVisibility(View.GONE);
+                    mytext.setTextColor(Color.BLACK);
 
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
+                    return view;
+                }
+            };
+            spinner4.setAdapter(s4adapter);
 
-                        otheruser4.setVisibility(View.VISIBLE);
-                    }
-                },1000);
-
-                you4.setText(item4);
-
-
-            }
-        });
-
-
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-        //Other Spinner2
-
-        ArrayAdapter<String> s4oadapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, Q4otherspinner) {
-            @NonNull
-            @Override
-            public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-                View view = super.getView(position, convertView, parent);
-
-                TextView mytext = (TextView) view.findViewById(android.R.id.text1);
-
-                mytext.setTextColor(Color.BLACK);
-
-                return view;
-            }
-        };
-        otherspinner4.setAdapter(s4oadapter);
-
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                otherspinner4.setVisibility(View.VISIBLE);
-            }
-        },1000);
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    spinner4.setVisibility(View.VISIBLE);
+                }
+            }, 1000);
 
 
+            spinner4.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    String item4 = spinner4.getItemAtPosition(position).toString();
 
-        otherspinner4.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String item4s = otherspinner4.getItemAtPosition(position).toString();
+                    Toast.makeText(getApplicationContext(), "You Selected " + item4, Toast.LENGTH_SHORT).show();
 
-                Toast.makeText(getApplicationContext(),"You Selected "+item4s,Toast.LENGTH_SHORT).show();
+                    q4a = item4;
 
-                otherspinner4.setVisibility(View.GONE);
+                    spinner4.setVisibility(View.GONE);
 
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
 
-                        Q4main.setVisibility(View.GONE);
-                        Q5main.setVisibility(View.VISIBLE);
-                        q5main();
+                            otheruser4.setVisibility(View.VISIBLE);
+                        }
+                    }, 1000);
 
-                    }
-                },1000);
-
-                Other4.setText(item4s);
+                    you4.setText(item4);
 
 
-            }
-        });
+                }
+            });
 
 
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            //Other Spinner2
+
+            ArrayAdapter<String> s4oadapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, Q4otherspinner) {
+                @NonNull
+                @Override
+                public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+                    View view = super.getView(position, convertView, parent);
+
+                    TextView mytext = (TextView) view.findViewById(android.R.id.text1);
+
+                    mytext.setTextColor(Color.BLACK);
+
+                    return view;
+                }
+            };
+            otherspinner4.setAdapter(s4oadapter);
+
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    otherspinner4.setVisibility(View.VISIBLE);
+                }
+            }, 1000);
+
+
+            otherspinner4.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    String item4s = otherspinner4.getItemAtPosition(position).toString();
+
+                    Toast.makeText(getApplicationContext(), "You Selected " + item4s, Toast.LENGTH_SHORT).show();
+
+                    q4b = item4s;
+
+                    otherspinner4.setVisibility(View.GONE);
+
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+
+                            Q4 = q4a + "," + q4b;
+                            SharedPreferences.Editor editor = getSharedPreferences("Questoins", MODE_PRIVATE).edit();
+                            editor.putString("Q4", Q4);
+                            editor.apply();
+
+
+                            Q4main.setVisibility(View.GONE);
+                            Q5main.setVisibility(View.VISIBLE);
+                            q5main();
+
+                        }
+                    }, 1000);
+
+                    Other4.setText(item4s);
+
+
+                }
+            });
+
+        } else {
+            Q4main.setVisibility(View.GONE);
+            Q5main.setVisibility(View.VISIBLE);
+            q5main();
+        }
 
 
         /////////////////////////////////////////////////////////////////////////////////
     }
 
-
-    public void q5main()
-    {
+    public void q5main() {
 
 // Mine Spinner5
 
-        ArrayAdapter<String> s5adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, Q5spinner) {
-            @NonNull
-            @Override
-            public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-                View view = super.getView(position, convertView, parent);
 
-                TextView mytext = (TextView) view.findViewById(android.R.id.text1);
+        SharedPreferences sharedPreferences = getSharedPreferences("Questoins", MODE_PRIVATE);
+        String Qu5 = sharedPreferences.getString("Q5", "");
 
-                mytext.setTextColor(Color.BLACK);
-
-                return view;
-            }
-        };
-        spinner5.setAdapter(s5adapter);
-
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                spinner5.setVisibility(View.VISIBLE);
-            }
-        },1000);
+        if (Qu5.isEmpty()) {
 
 
-        spinner5.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String item5 = spinner5.getItemAtPosition(position).toString();
+            ArrayAdapter<String> s5adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, Q5spinner) {
+                @NonNull
+                @Override
+                public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+                    View view = super.getView(position, convertView, parent);
 
-                Toast.makeText(getApplicationContext(),"You Selected "+item5,Toast.LENGTH_SHORT).show();
+                    TextView mytext = (TextView) view.findViewById(android.R.id.text1);
 
-                spinner5.setVisibility(View.GONE);
+                    mytext.setTextColor(Color.BLACK);
 
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
+                    return view;
+                }
+            };
+            spinner5.setAdapter(s5adapter);
 
-                        otheruser5.setVisibility(View.VISIBLE);
-                    }
-                },1000);
-
-                you5.setText(item5);
-
-
-            }
-        });
-
-
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-        //Other Spinner2
-
-        ArrayAdapter<String> s5oadapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, Q5otherspinner) {
-            @NonNull
-            @Override
-            public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-                View view = super.getView(position, convertView, parent);
-
-                TextView mytext = (TextView) view.findViewById(android.R.id.text1);
-
-                mytext.setTextColor(Color.BLACK);
-
-                return view;
-            }
-        };
-        otherspinner5.setAdapter(s5oadapter);
-
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                otherspinner5.setVisibility(View.VISIBLE);
-            }
-        },1000);
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    spinner5.setVisibility(View.VISIBLE);
+                }
+            }, 1000);
 
 
+            spinner5.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    String item5 = spinner5.getItemAtPosition(position).toString();
 
-        otherspinner5.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String item5s = otherspinner5.getItemAtPosition(position).toString();
+                    Toast.makeText(getApplicationContext(), "You Selected " + item5, Toast.LENGTH_SHORT).show();
 
-                Toast.makeText(getApplicationContext(),"You Selected "+item5s,Toast.LENGTH_SHORT).show();
+                    q5a = item5;
 
-                otherspinner5.setVisibility(View.GONE);
+                    spinner5.setVisibility(View.GONE);
 
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
 
-                        Q5main.setVisibility(View.GONE);
-                        Q6main.setVisibility(View.VISIBLE);
-                        q6main();
+                            otheruser5.setVisibility(View.VISIBLE);
+                        }
+                    }, 1000);
 
-                    }
-                },1000);
-
-                Other5.setText(item5s);
+                    you5.setText(item5);
 
 
-            }
-        });
+                }
+            });
 
 
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            //Other Spinner2
+
+            ArrayAdapter<String> s5oadapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, Q5otherspinner) {
+                @NonNull
+                @Override
+                public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+                    View view = super.getView(position, convertView, parent);
+
+                    TextView mytext = (TextView) view.findViewById(android.R.id.text1);
+
+                    mytext.setTextColor(Color.BLACK);
+
+                    return view;
+                }
+            };
+            otherspinner5.setAdapter(s5oadapter);
+
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    otherspinner5.setVisibility(View.VISIBLE);
+                }
+            }, 1000);
+
+
+            otherspinner5.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    String item5s = otherspinner5.getItemAtPosition(position).toString();
+
+                    Toast.makeText(getApplicationContext(), "You Selected " + item5s, Toast.LENGTH_SHORT).show();
+
+                    q5b = item5s;
+
+                    otherspinner5.setVisibility(View.GONE);
+
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+
+                            Q5 = q5a + "," + q5b;
+                            SharedPreferences.Editor editor = getSharedPreferences("Questoins", MODE_PRIVATE).edit();
+                            editor.putString("Q5", Q5);
+                            editor.apply();
+
+                            Q5main.setVisibility(View.GONE);
+                            Q6main.setVisibility(View.VISIBLE);
+                            q6main();
+
+                        }
+                    }, 1000);
+
+                    Other5.setText(item5s);
+
+
+                }
+            });
+
+        } else {
+            Q5main.setVisibility(View.GONE);
+            Q6main.setVisibility(View.VISIBLE);
+            q6main();
+        }
 
 
         /////////////////////////////////////////////////////////////////////////////////
     }
 
-    public void q6main()
-    {
+
+
+    public void q6main() {
 
 // Mine Spinner6
 
-        ArrayAdapter<String> s6adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, Q6spinner) {
-            @NonNull
-            @Override
-            public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-                View view = super.getView(position, convertView, parent);
+        SharedPreferences sharedPreferences = getSharedPreferences("Questoins", MODE_PRIVATE);
+        String Qu6 = sharedPreferences.getString("Q6", "");
 
-                TextView mytext = (TextView) view.findViewById(android.R.id.text1);
-
-                mytext.setTextColor(Color.BLACK);
-
-                return view;
-            }
-        };
-        spinner6.setAdapter(s6adapter);
-
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                spinner6.setVisibility(View.VISIBLE);
-            }
-        },1000);
+        if (Qu6.isEmpty()) {
 
 
-        spinner6.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String item6 = spinner6.getItemAtPosition(position).toString();
+            ArrayAdapter<String> s6adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, Q6spinner) {
+                @NonNull
+                @Override
+                public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+                    View view = super.getView(position, convertView, parent);
 
-                Toast.makeText(getApplicationContext(),"You Selected "+item6,Toast.LENGTH_SHORT).show();
+                    TextView mytext = (TextView) view.findViewById(android.R.id.text1);
 
-                spinner6.setVisibility(View.GONE);
+                    mytext.setTextColor(Color.BLACK);
 
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
+                    return view;
+                }
+            };
+            spinner6.setAdapter(s6adapter);
 
-                        otheruser6.setVisibility(View.VISIBLE);
-                    }
-                },1000);
-
-                you6.setText(item6);
-
-
-            }
-        });
-
-
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-        //Other Spinner2
-
-        ArrayAdapter<String> s6oadapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, Q6otherspinner) {
-            @NonNull
-            @Override
-            public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-                View view = super.getView(position, convertView, parent);
-
-                TextView mytext = (TextView) view.findViewById(android.R.id.text1);
-
-                mytext.setTextColor(Color.BLACK);
-
-                return view;
-            }
-        };
-        otherspinner6.setAdapter(s6oadapter);
-
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                otherspinner6.setVisibility(View.VISIBLE);
-            }
-        },1000);
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    spinner6.setVisibility(View.VISIBLE);
+                }
+            }, 1000);
 
 
+            spinner6.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    String item6 = spinner6.getItemAtPosition(position).toString();
 
-        otherspinner6.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String item6s = otherspinner6.getItemAtPosition(position).toString();
+                    Toast.makeText(getApplicationContext(), "You Selected " + item6, Toast.LENGTH_SHORT).show();
 
-                Toast.makeText(getApplicationContext(),"You Selected "+item6s,Toast.LENGTH_SHORT).show();
+                    q6a = item6;
 
-                otherspinner6.setVisibility(View.GONE);
+                    spinner6.setVisibility(View.GONE);
 
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
 
-                        Q6main.setVisibility(View.GONE);
-                        Q7main.setVisibility(View.VISIBLE);
-                        q7main();
+                            otheruser6.setVisibility(View.VISIBLE);
+                        }
+                    }, 1000);
 
-                    }
-                },1000);
-
-                Other6.setText(item6s);
+                    you6.setText(item6);
 
 
-            }
-        });
+                }
+            });
 
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            //Other Spinner2
+
+            ArrayAdapter<String> s6oadapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, Q6otherspinner) {
+                @NonNull
+                @Override
+                public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+                    View view = super.getView(position, convertView, parent);
+
+                    TextView mytext = (TextView) view.findViewById(android.R.id.text1);
+
+                    mytext.setTextColor(Color.BLACK);
+
+                    return view;
+                }
+            };
+            otherspinner6.setAdapter(s6oadapter);
+
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    otherspinner6.setVisibility(View.VISIBLE);
+                }
+            }, 1000);
+
+
+            otherspinner6.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    String item6s = otherspinner6.getItemAtPosition(position).toString();
+
+                    Toast.makeText(getApplicationContext(), "You Selected " + item6s, Toast.LENGTH_SHORT).show();
+
+                    q6b = item6s;
+
+                    otherspinner6.setVisibility(View.GONE);
+
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+
+                            Q6 = q6a + "," + q6b;
+                            SharedPreferences.Editor editor = getSharedPreferences("Questoins", MODE_PRIVATE).edit();
+                            editor.putString("Q6", Q6);
+                            editor.apply();
+
+
+                            Q6main.setVisibility(View.GONE);
+                            Q7main.setVisibility(View.VISIBLE);
+                            q7main();
+
+                        }
+                    }, 1000);
+
+                    Other6.setText(item6s);
+
+
+                }
+            });
+
+        }
+
+        else
+
+    {
+        Q6main.setVisibility(View.GONE);
+        Q7main.setVisibility(View.VISIBLE);
+        q7main();
     }
 
-    public void q7main()
-    {
+}
+
+    public void q7main() {
+        SharedPreferences sharedPreferences = getSharedPreferences("Questoins", MODE_PRIVATE);
+        String Qu7 = sharedPreferences.getString("Q7", "");
+
+        if (Qu7.isEmpty())
+        {
+
+
 
 // Mine Spinner6
 
@@ -1015,6 +1145,8 @@ public class SignupSuccessfullActivity extends AppCompatActivity {
                 String item7 = spinner7.getItemAtPosition(position).toString();
 
                 Toast.makeText(getApplicationContext(),"You Selected "+item7,Toast.LENGTH_SHORT).show();
+
+                q7a=item7;
 
                 spinner7.setVisibility(View.GONE);
 
@@ -1069,11 +1201,19 @@ public class SignupSuccessfullActivity extends AppCompatActivity {
 
                 Toast.makeText(getApplicationContext(),"You Selected "+item7s,Toast.LENGTH_SHORT).show();
 
+                q7b=item7s;
+
                 otherspinner7.setVisibility(View.GONE);
 
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
+
+                        Q7=q7a+","+q7b;
+                        SharedPreferences.Editor editor = getSharedPreferences("Questoins", MODE_PRIVATE).edit();
+                        editor.putString("Q7",Q7);
+                        editor.apply();
+
 
                         Q7main.setVisibility(View.GONE);
                         Q8main.setVisibility(View.VISIBLE);
@@ -1087,10 +1227,24 @@ public class SignupSuccessfullActivity extends AppCompatActivity {
             }
         });
 
+        }
+        else {
+            Q7main.setVisibility(View.GONE);
+            Q8main.setVisibility(View.VISIBLE);
+            q8main();
+        }
+
+
     }
 
-    public void q8main()
-    {
+    public void q8main() {
+        SharedPreferences sharedPreferences = getSharedPreferences("Questoins", MODE_PRIVATE);
+        String Qu8 = sharedPreferences.getString("Q8", "");
+
+        if (Qu8.isEmpty())
+        {
+
+
 
 // Mine Spinner6
 
@@ -1123,6 +1277,8 @@ public class SignupSuccessfullActivity extends AppCompatActivity {
                 String item8 = spinner8.getItemAtPosition(position).toString();
 
                 Toast.makeText(getApplicationContext(),"You Selected "+item8,Toast.LENGTH_SHORT).show();
+
+                q8a=item8;
 
                 spinner8.setVisibility(View.GONE);
 
@@ -1176,11 +1332,19 @@ public class SignupSuccessfullActivity extends AppCompatActivity {
 
                 Toast.makeText(getApplicationContext(),"You Selected "+item8s,Toast.LENGTH_SHORT).show();
 
+                q8b=item8s;
+
                 otherspinner8.setVisibility(View.GONE);
 
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
+
+                        Q8=q8a+","+q8b;
+                        SharedPreferences.Editor editor = getSharedPreferences("Questoins", MODE_PRIVATE).edit();
+                        editor.putString("Q8",Q8);
+                        editor.apply();
+
 
                         Q8main.setVisibility(View.GONE);
                         Q9main.setVisibility(View.VISIBLE);
@@ -1194,14 +1358,32 @@ public class SignupSuccessfullActivity extends AppCompatActivity {
             }
         });
 
+
+        }
+        else {
+            Q8main.setVisibility(View.GONE);
+            Q9main.setVisibility(View.VISIBLE);
+            q9main();
+        }
+
+
     }
 
-    public void q9main()
-    {
+    public void q9main() {
 
 // Mine Spinner6
 
-        ArrayAdapter<String> s9adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, Q9spinner) {
+        SharedPreferences sharedPreferences = getSharedPreferences("Questoins", MODE_PRIVATE);
+        String Qu9 = sharedPreferences.getString("Q9", "");
+
+        if (Qu9.isEmpty())
+        {
+
+
+
+
+
+            ArrayAdapter<String> s9adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, Q9spinner) {
             @NonNull
             @Override
             public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
@@ -1230,6 +1412,8 @@ public class SignupSuccessfullActivity extends AppCompatActivity {
                 String item9 = spinner9.getItemAtPosition(position).toString();
 
                 Toast.makeText(getApplicationContext(),"You Selected "+item9,Toast.LENGTH_SHORT).show();
+
+                q9a=item9;
 
                 spinner9.setVisibility(View.GONE);
 
@@ -1283,11 +1467,18 @@ public class SignupSuccessfullActivity extends AppCompatActivity {
 
                 Toast.makeText(getApplicationContext(),"You Selected "+item9s,Toast.LENGTH_SHORT).show();
 
+                q9b=item9s;
+
                 otherspinner9.setVisibility(View.GONE);
 
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
+
+                        Q9=q9a+","+q9b;
+                        SharedPreferences.Editor editor = getSharedPreferences("Questoins", MODE_PRIVATE).edit();
+                        editor.putString("Q9",Q9);
+                        editor.apply();
 
                         Q9main.setVisibility(View.GONE);
                         Q10main.setVisibility(View.VISIBLE);
@@ -1302,14 +1493,27 @@ public class SignupSuccessfullActivity extends AppCompatActivity {
             }
         });
 
+        }
+        else {
+            Q1main.setVisibility(View.GONE);
+            Q2main.setVisibility(View.VISIBLE);
+            q2main();
+        }
+
     }
 
-    public void q10main()
-    {
+    public void q10main() {
 
-// Mine Spinner6
+// Mine Spinner10
 
-        ArrayAdapter<String> s10adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, Q10spinner) {
+        SharedPreferences sharedPreferences = getSharedPreferences("Questoins", MODE_PRIVATE);
+        String Qu10 = sharedPreferences.getString("Q10", "");
+
+        if (Qu10.isEmpty())
+        {
+
+
+            ArrayAdapter<String> s10adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, Q10spinner) {
             @NonNull
             @Override
             public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
@@ -1338,6 +1542,8 @@ public class SignupSuccessfullActivity extends AppCompatActivity {
                 String item10 = spinner10.getItemAtPosition(position).toString();
 
                 Toast.makeText(getApplicationContext(),"You Selected "+item10,Toast.LENGTH_SHORT).show();
+
+                q10a=item10;
 
                 spinner10.setVisibility(View.GONE);
 
@@ -1391,11 +1597,18 @@ public class SignupSuccessfullActivity extends AppCompatActivity {
 
                 Toast.makeText(getApplicationContext(),"You Selected "+item10s,Toast.LENGTH_SHORT).show();
 
+                q10b=item10s;
+
                 otherspinner10.setVisibility(View.GONE);
 
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
+
+                        Q10=q10a+","+q10b;
+                        SharedPreferences.Editor editor = getSharedPreferences("Questoins", MODE_PRIVATE).edit();
+                        editor.putString("Q10",Q10);
+                        editor.apply();
 
                         Q10main.setVisibility(View.GONE);
                         Q11main.setVisibility(View.VISIBLE);
@@ -1410,14 +1623,29 @@ public class SignupSuccessfullActivity extends AppCompatActivity {
             }
         });
 
+        }
+        else {
+            Q10main.setVisibility(View.GONE);
+            Q11main.setVisibility(View.VISIBLE);
+            q11main();
+        }
+
     }
 
-    public void q11main()
-    {
 
-// Mine Spinner6
 
-        ArrayAdapter<String> s11adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, Q11spinner) {
+    public void q11main() {
+
+// Mine Spinner11
+
+        SharedPreferences sharedPreferences = getSharedPreferences("Questoins", MODE_PRIVATE);
+        String Qu11 = sharedPreferences.getString("Q11", "");
+
+        if (Qu11.isEmpty())
+        {
+
+
+            ArrayAdapter<String> s11adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, Q11spinner) {
             @NonNull
             @Override
             public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
@@ -1446,6 +1674,8 @@ public class SignupSuccessfullActivity extends AppCompatActivity {
                 String item11 = spinner11.getItemAtPosition(position).toString();
 
                 Toast.makeText(getApplicationContext(),"You Selected "+item11,Toast.LENGTH_SHORT).show();
+
+                q11a=item11;
 
                 spinner11.setVisibility(View.GONE);
 
@@ -1499,11 +1729,19 @@ public class SignupSuccessfullActivity extends AppCompatActivity {
 
                 Toast.makeText(getApplicationContext(),"You Selected "+item11s,Toast.LENGTH_SHORT).show();
 
+                q11b=item11s;
+
                 otherspinner11.setVisibility(View.GONE);
 
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
+
+                        Q11=q11a+","+q11b;
+                        SharedPreferences.Editor editor = getSharedPreferences("Questoins", MODE_PRIVATE).edit();
+                        editor.putString("Q11",Q11);
+                        editor.apply();
+
 
                         Q11main.setVisibility(View.GONE);
                         Q12main.setVisibility(View.VISIBLE);
@@ -1517,14 +1755,29 @@ public class SignupSuccessfullActivity extends AppCompatActivity {
             }
         });
 
+
+        }
+        else {
+            Q11main.setVisibility(View.GONE);
+            Q12main.setVisibility(View.VISIBLE);
+            q12main();
+        }
+
+
     }
 
-    public void q12main()
-    {
+    public void q12main() {
 
-// Mine Spinner6
+// Mine Spinner12
 
-        ArrayAdapter<String> s12adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, Q12spinner) {
+        SharedPreferences sharedPreferences = getSharedPreferences("Questoins", MODE_PRIVATE);
+        String Qu12 = sharedPreferences.getString("Q12", "");
+
+        if (Qu12.isEmpty())
+        {
+
+
+            ArrayAdapter<String> s12adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, Q12spinner) {
             @NonNull
             @Override
             public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
@@ -1553,6 +1806,8 @@ public class SignupSuccessfullActivity extends AppCompatActivity {
                 String item12 = spinner12.getItemAtPosition(position).toString();
 
                 Toast.makeText(getApplicationContext(),"You Selected "+item12,Toast.LENGTH_SHORT).show();
+
+                q12a=item12;
 
                 spinner12.setVisibility(View.GONE);
 
@@ -1606,11 +1861,18 @@ public class SignupSuccessfullActivity extends AppCompatActivity {
 
                 Toast.makeText(getApplicationContext(),"You Selected "+item12s,Toast.LENGTH_SHORT).show();
 
+                q12b=item12s;
+
                 otherspinner12.setVisibility(View.GONE);
 
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
+
+                        Q12=q12a+","+q12b;
+                        SharedPreferences.Editor editor = getSharedPreferences("Questoins", MODE_PRIVATE).edit();
+                        editor.putString("Q1",Q1);
+                        editor.apply();
 
                         Q12main.setVisibility(View.GONE);
                         Q13main.setVisibility(View.VISIBLE);
@@ -1625,14 +1887,29 @@ public class SignupSuccessfullActivity extends AppCompatActivity {
             }
         });
 
+        }
+        else {
+            Q12main.setVisibility(View.GONE);
+            Q13main.setVisibility(View.VISIBLE);
+            q13main();
+        }
+
+
     }
 
-    public void q13main()
-    {
+    public void q13main() {
 
-// Mine Spinner6
+// Mine Spinner13
 
-        ArrayAdapter<String> s13adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, Q13spinner) {
+        SharedPreferences sharedPreferences = getSharedPreferences("Questoins", MODE_PRIVATE);
+        String Qu13 = sharedPreferences.getString("Q13", "");
+
+        if (Qu13.isEmpty())
+        {
+
+
+
+            ArrayAdapter<String> s13adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, Q13spinner) {
             @NonNull
             @Override
             public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
@@ -1661,6 +1938,8 @@ public class SignupSuccessfullActivity extends AppCompatActivity {
                 String item13 = spinner13.getItemAtPosition(position).toString();
 
                 Toast.makeText(getApplicationContext(),"You Selected "+item13,Toast.LENGTH_SHORT).show();
+
+                q13a=item13;
 
                 spinner13.setVisibility(View.GONE);
 
@@ -1714,12 +1993,20 @@ public class SignupSuccessfullActivity extends AppCompatActivity {
 
                 Toast.makeText(getApplicationContext(),"You Selected "+item13s,Toast.LENGTH_SHORT).show();
 
+                q13b=item13s;
+
                 otherspinner13.setVisibility(View.GONE);
 
 
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
+
+                        Q13=q13a+","+q13b;
+                        SharedPreferences.Editor editor = getSharedPreferences("Questoins", MODE_PRIVATE).edit();
+                        editor.putString("Q13",Q13);
+                        editor.apply();
+
 
                         Q13main.setVisibility(View.GONE);
                         Q14main.setVisibility(View.VISIBLE);
@@ -1734,14 +2021,29 @@ public class SignupSuccessfullActivity extends AppCompatActivity {
             }
         });
 
+        }
+        else {
+            Q13main.setVisibility(View.GONE);
+            Q14main.setVisibility(View.VISIBLE);
+            q14main();
+        }
+
     }
 
-    public void q14main()
-    {
+    public void q14main() {
 
 // Mine Spinner6
 
-        ArrayAdapter<String> s14adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, Q14spinner) {
+        SharedPreferences sharedPreferences = getSharedPreferences("Questoins", MODE_PRIVATE);
+        String Qu14 = sharedPreferences.getString("Q14", "");
+
+        if (Qu14.isEmpty())
+        {
+
+
+
+
+            ArrayAdapter<String> s14adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, Q14spinner) {
             @NonNull
             @Override
             public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
@@ -1770,6 +2072,8 @@ public class SignupSuccessfullActivity extends AppCompatActivity {
                 String item14 = spinner14.getItemAtPosition(position).toString();
 
                 Toast.makeText(getApplicationContext(),"You Selected "+item14,Toast.LENGTH_SHORT).show();
+
+                q14a=item14;
 
                 spinner14.setVisibility(View.GONE);
 
@@ -1823,12 +2127,19 @@ public class SignupSuccessfullActivity extends AppCompatActivity {
 
                 Toast.makeText(getApplicationContext(),"You Selected "+item14s,Toast.LENGTH_SHORT).show();
 
+                q14b=item14s;
+
                 otherspinner14.setVisibility(View.GONE);
 
 
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
+
+                        Q14=q14a+","+q14b;
+                        SharedPreferences.Editor editor = getSharedPreferences("Questoins", MODE_PRIVATE).edit();
+                        editor.putString("Q14",Q14);
+                        editor.apply();
 
                         Q14main.setVisibility(View.GONE);
                         Q15main.setVisibility(View.VISIBLE);
@@ -1843,14 +2154,31 @@ public class SignupSuccessfullActivity extends AppCompatActivity {
             }
         });
 
+        }
+        else {
+            Q14main.setVisibility(View.GONE);
+            Q15main.setVisibility(View.VISIBLE);
+            q15main();
+        }
+
+
+
     }
 
-    public void q15main()
-    {
+    public void q15main() {
 
-// Mine Spinner6
+// Mine Spinner15
 
-        ArrayAdapter<String> s15adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, Q15spinner) {
+        SharedPreferences sharedPreferences = getSharedPreferences("Questoins", MODE_PRIVATE);
+        String Qu15 = sharedPreferences.getString("Q15", "");
+
+        if (Qu15.isEmpty())
+        {
+
+
+
+
+            ArrayAdapter<String> s15adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, Q15spinner) {
             @NonNull
             @Override
             public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
@@ -1879,6 +2207,8 @@ public class SignupSuccessfullActivity extends AppCompatActivity {
                 String item15 = spinner15.getItemAtPosition(position).toString();
 
                 Toast.makeText(getApplicationContext(),"You Selected "+item15,Toast.LENGTH_SHORT).show();
+
+                q15a=item15;
 
                 spinner15.setVisibility(View.GONE);
 
@@ -1932,6 +2262,8 @@ public class SignupSuccessfullActivity extends AppCompatActivity {
 
                 Toast.makeText(getApplicationContext(),"You Selected "+item15s,Toast.LENGTH_SHORT).show();
 
+                q15b=item15s;
+
                 otherspinner15.setVisibility(View.GONE);
 
 
@@ -1946,12 +2278,18 @@ public class SignupSuccessfullActivity extends AppCompatActivity {
                             @Override
                             public void run() {
 
+                                Q15=q15a+","+q15b;
+                                SharedPreferences.Editor editor = getSharedPreferences("Questoins", MODE_PRIVATE).edit();
+                                editor.putString("Q15",Q15);
+                                editor.apply();
+
+
+
                                 questionPart.setVisibility(View.GONE);
                                 updation.setVisibility(View.VISIBLE);
 
                             }
                         },2000);
-
 
 
                     }
@@ -1963,7 +2301,18 @@ public class SignupSuccessfullActivity extends AppCompatActivity {
             }
         });
 
+        }
+        else {
+
+            questionPart.setVisibility(View.GONE);
+            updation.setVisibility(View.VISIBLE);
+        }
+
+
+
     }
+
+
 
 
 }

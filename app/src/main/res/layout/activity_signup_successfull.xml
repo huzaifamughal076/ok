@@ -2079,7 +2079,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Do you often find yourself worring\nabout things that you haveno\ncontrol over?"
+            android:text="Do you often find yourself worring\nabout things that you have no\ncontrol over?"
             android:textColor="#686565"
             android:textSize="16sp"
             android:textStyle="bold" />
