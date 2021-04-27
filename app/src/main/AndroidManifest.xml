@@ -3,12 +3,14 @@
     package="com.example.cupid">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.INTERACT_ACROSS_PROFILES"/>
+    <uses-permission android:name="android.permission.INTERACT_ACROSS_PROFILES" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
+
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -17,13 +19,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Activities.EmptyRequiredData"></activity>
+        <activity
+            android:name=".Activities.EditImages"
+            android:label="@string/title_activity_edit_images"
+            android:theme="@style/NoActionBar"></activity>
+        <activity android:name=".Activities.EmptyRequiredData" />
         <activity
             android:name=".Activities.PreferencesDistance"
-            android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".Activities.PreferencesAge"
-            android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".Activities.BodyType"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
@@ -60,7 +66,6 @@
         <activity
             android:name=".Activities.SplashScreen"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

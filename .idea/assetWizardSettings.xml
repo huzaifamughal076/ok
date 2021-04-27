@@ -18,7 +18,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="file:$USER_HOME$/Android/Sdk/icons/material/materialicons/edit/baseline_edit_24.xml" />
+                                      <entry key="url" value="file:/$USER_HOME$/AppData/Local/Android/Sdk/icons/material/materialicons/add/baseline_add_24.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -28,8 +28,9 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="color" value="4069fa" />
-                            <entry key="outputName" value="blue_pencil1" />
+                            <entry key="color" value="fffdfe" />
+                            <entry key="outputName" value="ic_baseline_add_24" />
+                            <entry key="sourceFile" value="C:\Users\huzai\AndroidStudioProjects\CupId" />
                           </map>
                         </option>
                       </PersistentState>
